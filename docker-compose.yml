@@ -1,0 +1,40 @@
+# Sobe o MySQL 8 (e, opcionalmente, a aplicação) com um único comando.
+#
+#   Só o banco (rodando o Node na sua máquina):   docker compose up -d db
+#   Banco + aplicação em containers:               docker compose up --build
+services:
+  db:
+    image: mysql:8.0
+    container_name: cupcakes-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: cupcakes_gourmet
+      MYSQL_USER: cupcakes
+      MYSQL_PASSWORD: cupcakes123
+    ports:
+      - "3306:3306"
+    volumes:
+      - cupcakes_dados:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ucupcakes", "-pcupcakes123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_USER: cupcakes
+      DB_PASSWORD: cupcakes123
+      DB_NAME: cupcakes_gourmet
+      JWT_SECRET: troque-esta-chave-em-producao
+    ports:
+      - "3000:3000"
+
+volumes:
+  cupcakes_dados:
