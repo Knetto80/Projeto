@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cupcakes Gourmet — Redefinir senha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Karla:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app" style="padding-bottom:20px">
+  <div class="container" style="padding-top:56px">
+    <div class="centro" style="margin-bottom:28px">
+      <div style="font-size:2.6rem; margin-bottom:6px">🔑</div>
+      <h1>Redefinir senha</h1>
+      <p>Escolha uma nova senha para a sua conta.</p>
+    </div>
+    <div id="mensagem"></div>
+    <form id="form-redefinir">
+      <div class="campo"><label>Nova senha (mínimo 8 caracteres)</label><input type="password" id="nova-senha" required minlength="8" autocomplete="new-password"></div>
+      <div class="campo"><label>Repita a nova senha</label><input type="password" id="confirma-senha" required minlength="8" autocomplete="new-password"></div>
+      <button class="botao botao-primario" type="submit">Salvar nova senha</button>
+    </form>
+    <p class="centro" style="margin-top:20px; font-size:0.85rem"><a href="login.html" style="color:var(--framboesa); font-weight:700">Voltar para o login</a></p>
+  </div>
+</div>
+<script src="js/api.js"></script>
+<script>
+  const token = new URLSearchParams(window.location.search).get('token');
+  const msg = document.getElementById('mensagem');
+  if (!token) {
+    msg.innerHTML = '<div class="mensagem-erro">Link incompleto. Abra o link recebido por e-mail ou solicite uma nova recuperação.</div>';
+    document.getElementById('form-redefinir').style.display = 'none';
+  }
+  document.getElementById('form-redefinir').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nova = document.getElementById('nova-senha').value;
+    if (nova !== document.getElementById('confirma-senha').value) {
+      msg.innerHTML = '<div class="mensagem-erro">As senhas não conferem.</div>';
+      return;
+    }
+    try {
+      const r = await api('/auth/redefinir-senha', { method: 'POST', autenticado: false, body: { token, nova_senha: nova } });
+      msg.innerHTML = `<div class="mensagem-sucesso">${r.mensagem}</div>`;
+      document.getElementById('form-redefinir').style.display = 'none';
+      setTimeout(() => (window.location.href = 'login.html'), 2500);
+    } catch (err) {
+      msg.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    }
+  });
+</script>
+</body>
+</html>

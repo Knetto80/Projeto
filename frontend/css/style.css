@@ -1,0 +1,472 @@
+/* =========================================================================
+   CUPCAKES GOURMET — Design System
+   Identidade: confeitaria artesanal contemporânea. Papel de manteiga +
+   framboesa + caramelo. Serifada para o apetite, sem-serifa para a função.
+   ========================================================================= */
+
+:root {
+  /* Cor */
+  --creme: #FFF8F0;
+  --creme-escuro: #F4E9DA;
+  --papel: #FFFFFF;
+  --chocolate: #3B2418;
+  --chocolate-suave: #7A6352;
+  --framboesa: #B8425E;
+  --framboesa-escura: #8F2F46;
+  --caramelo: #C98A3E;
+  --caramelo-claro: #F0DDB2;
+  --sucesso: #4C7A5D;
+  --alerta: #A31C36;
+  --linha: #E8DCC8;
+
+  /* Tipografia */
+  --fonte-titulo: 'Fraunces', 'Georgia', serif;
+  --fonte-corpo: 'Karla', -apple-system, sans-serif;
+
+  /* Layout */
+  --raio: 18px;
+  --raio-pequeno: 10px;
+  --sombra: 0 6px 20px rgba(59, 36, 24, 0.10);
+  --max-largura: 480px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--creme);
+  color: var(--chocolate);
+  font-family: var(--fonte-corpo);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#app {
+  width: 100%;
+  max-width: var(--max-largura);
+  min-height: 100vh;
+  background: var(--creme);
+  position: relative;
+  padding-bottom: 84px; /* espaço para nav inferior */
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  color: var(--chocolate);
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.25rem; }
+h3 { font-size: 1.05rem; }
+
+p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
+
+:focus-visible {
+  outline: 3px solid var(--caramelo);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* --- Cabeçalho -------------------------------------------------------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--creme);
+  padding: 18px 20px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--linha);
+}
+
+.topo .marca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fonte-titulo);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.topo .marca .ponto { color: var(--framboesa); }
+
+.topo .acoes { display: flex; align-items: center; gap: 14px; }
+
+.icone-botao {
+  position: relative;
+  background: none;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--chocolate);
+}
+.icone-botao:hover { background: var(--creme-escuro); }
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--framboesa);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.subtopo { padding: 4px 20px 14px; }
+.subtopo .saudacao { font-size: 0.95rem; color: var(--chocolate-suave); margin: 0; }
+
+/* --- Barra de navegação inferior --------------------------------------- */
+.nav-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max-largura);
+  background: var(--papel);
+  border-top: 1px solid var(--linha);
+  display: flex;
+  z-index: 30;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.nav-inferior a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 0 8px;
+  font-size: 0.68rem;
+  color: var(--chocolate-suave);
+  font-weight: 600;
+}
+
+.nav-inferior a.ativo { color: var(--framboesa); }
+.nav-inferior svg { width: 22px; height: 22px; }
+
+/* --- Busca e filtros ---------------------------------------------------- */
+.busca {
+  margin: 0 20px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 11px 14px;
+}
+.busca input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--chocolate);
+}
+.busca svg { flex-shrink: 0; color: var(--chocolate-suave); }
+
+.filtros {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filtros::-webkit-scrollbar { display: none; }
+
+.chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--linha);
+  background: var(--papel);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--chocolate-suave);
+  white-space: nowrap;
+}
+.chip.ativo { background: var(--chocolate); border-color: var(--chocolate); color: #fff; }
+
+/* --- Grade de produtos ---------------------------------------------------- */
+.secao { padding: 0 20px 22px; }
+.secao-titulo { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.secao-titulo .contagem { font-size: 0.78rem; color: var(--chocolate-suave); }
+
+.grade-produtos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.cartao-produto {
+  background: var(--papel);
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+}
+.cartao-produto .imagem { aspect-ratio: 1 / 1; background: var(--creme-escuro); }
+.cartao-produto .imagem img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cartao-produto .corpo { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.cartao-produto .nome { font-family: var(--fonte-titulo); font-size: 0.92rem; font-weight: 600; line-height: 1.25; }
+.cartao-produto .preco { font-weight: 700; color: var(--framboesa); font-size: 0.95rem; margin-top: auto; }
+.cartao-produto .rodape-cartao { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+
+.botao-add {
+  background: var(--chocolate);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.botao-add:active { transform: scale(0.92); }
+
+.indisponivel-tag {
+  position: absolute;
+  background: rgba(59,36,24,0.82);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin: 8px;
+}
+
+/* --- Botões --------------------------------------------------------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--raio-pequeno);
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  width: 100%;
+}
+.botao-primario { background: var(--framboesa); color: #fff; }
+.botao-primario:active { background: var(--framboesa-escura); }
+.botao-primario:disabled { background: var(--linha); color: var(--chocolate-suave); }
+.botao-secundario { background: var(--papel); color: var(--chocolate); border: 1.5px solid var(--linha); }
+.botao-texto { background: none; color: var(--framboesa); font-weight: 700; padding: 8px; width: auto; }
+
+/* --- Formulários ------------------------------------------------------- */
+.campo { margin-bottom: 14px; }
+.campo label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--chocolate-suave);
+  margin-bottom: 6px;
+}
+.campo input, .campo select, .campo textarea {
+  width: 100%;
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio-pequeno);
+  padding: 12px 14px;
+  font-size: 0.92rem;
+  background: var(--papel);
+  color: var(--chocolate);
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  border-color: var(--framboesa);
+  outline: none;
+}
+.campo-linha { display: flex; gap: 10px; }
+.campo-linha .campo { flex: 1; }
+
+.mensagem-erro {
+  background: #FBEAEC;
+  border: 1px solid #EBC2C9;
+  color: var(--alerta);
+  padding: 11px 14px;
+  border-radius: var(--raio-pequeno);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+.mensagem-sucesso {
+  background: #E9F2EC;
+  border: 1px solid #C3DBCB;
+  color: var(--sucesso);
+  padding: 11px 14px;
+  border-radius: var(--raio-pequeno);
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+/* --- Cartões genéricos --------------------------------------------------- */
+.cartao {
+  background: var(--papel);
+  border-radius: var(--raio);
+  padding: 16px;
+  box-shadow: var(--sombra);
+  margin-bottom: 14px;
+}
+
+.linha-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: var(--chocolate-suave);
+  margin-bottom: 6px;
+}
+.linha-total.destaque {
+  color: var(--chocolate);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding-top: 10px;
+  margin-top: 6px;
+  border-top: 1px solid var(--linha);
+}
+
+/* --- Barra fixa inferior de ação (checkout, add ao carrinho) ----------- */
+.barra-acao {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, var(--creme) 65%, transparent);
+  padding: 16px 20px 20px;
+  margin: 0 -20px;
+}
+
+/* --- Marca d'água tipo forminha de cupcake (uso único, no herói) ------- */
+.onda-forminha {
+  height: 14px;
+  background: repeating-linear-gradient(
+    115deg, var(--creme) 0 7px, transparent 7px 14px
+  );
+}
+
+/* --- Estados vazios ------------------------------------------------------ */
+.vazio {
+  text-align: center;
+  padding: 60px 30px;
+  color: var(--chocolate-suave);
+}
+.vazio h3 { color: var(--chocolate); margin-bottom: 6px; }
+
+/* --- Status do pedido (linha do tempo) ---------------------------------- */
+.linha-tempo { padding: 4px 0; }
+.etapa-status {
+  display: flex;
+  gap: 14px;
+  position: relative;
+  padding-bottom: 26px;
+}
+.etapa-status:last-child { padding-bottom: 0; }
+.etapa-status .marcador {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--linha);
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.etapa-status.concluida .marcador { background: var(--sucesso); color: #fff; }
+.etapa-status.atual .marcador { background: var(--framboesa); color: #fff; box-shadow: 0 0 0 4px #F5DBE1; }
+.etapa-status:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 26px;
+  bottom: 0;
+  width: 2px;
+  background: var(--linha);
+}
+.etapa-status.concluida:not(:last-child)::before { background: var(--sucesso); }
+.etapa-status .texto-etapa .titulo-etapa { font-weight: 700; font-size: 0.9rem; }
+.etapa-status .texto-etapa .hora-etapa { font-size: 0.78rem; color: var(--chocolate-suave); }
+
+/* --- Cartão de pedido no histórico --------------------------------------- */
+.cartao-pedido { display: block; }
+.cartao-pedido .cabecalho-pedido { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.cartao-pedido .numero { font-weight: 700; font-family: var(--fonte-titulo); }
+.etiqueta-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--caramelo-claro);
+  color: #7A5620;
+}
+.etiqueta-status.entregue { background: #DCEBE1; color: var(--sucesso); }
+.etiqueta-status.cancelado { background: #F5DBDE; color: var(--alerta); }
+
+/* --- Toast --------------------------------------------------------------- */
+#toast-container {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 100%;
+  max-width: calc(var(--max-largura) - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--chocolate);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: var(--raio-pequeno);
+  font-size: 0.85rem;
+  box-shadow: var(--sombra);
+  animation: entrar-toast 0.25s ease-out;
+}
+.toast.erro { background: var(--alerta); }
+.toast.sucesso { background: var(--sucesso); }
+@keyframes entrar-toast {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Estrelas -------------------------------------------------------- */
+.estrelas { color: var(--caramelo); font-size: 0.85rem; display: flex; align-items: center; gap: 3px; }
+.seletor-estrelas { display: flex; gap: 6px; font-size: 1.6rem; }
+.seletor-estrelas button { background: none; border: none; color: var(--linha); padding: 0; }
+.seletor-estrelas button.selecionada { color: var(--caramelo); }
+
+/* --- Utilidades -------------------------------------------------------- */
+.container { padding: 18px 20px; }
+.espaco-topo { margin-top: 18px; }
+.centro { text-align: center; }
+.carregando { text-align: center; padding: 40px; color: var(--chocolate-suave); font-size: 0.85rem; }
