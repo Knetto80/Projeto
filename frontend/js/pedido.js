@@ -56,9 +56,9 @@ async function carregarPedido() {
         .map(
           (i, idx) => `
         <div style="display:flex; gap:12px; align-items:center; padding:12px 0; ${idx !== pedido.itens.length - 1 ? 'border-bottom:1px solid var(--linha)' : ''}">
-          <img src="${i.produto.imagens[0]?.url_imagem || ''}" style="width:48px;height:48px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
+          <img src="${esc(i.produto.imagens[0]?.url_imagem || '')}" style="width:48px;height:48px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
           <div style="flex:1">
-            <div style="font-weight:700; font-size:0.87rem">${i.produto.nome} ${i.quantidade > 1 ? `× ${i.quantidade}` : ''}</div>
+            <div style="font-weight:700; font-size:0.87rem">${esc(i.produto.nome)} ${i.quantidade > 1 ? `× ${i.quantidade}` : ''}</div>
           </div>
           <div style="font-weight:700; font-size:0.85rem">${formatarPreco(i.subtotal)}</div>
         </div>`
@@ -89,7 +89,7 @@ function renderizarAvaliacao(pedido) {
   bloco.innerHTML = `<h3 class="espaco-topo">Avaliar pedido</h3>` + pedido.itens
     .map((i) => `
     <div class="cartao" id="avaliacao-produto-${i.produto.id_produto}">
-      <p style="font-weight:700; color:var(--chocolate); margin-bottom:8px">${i.produto.nome}</p>
+      <p style="font-weight:700; color:var(--chocolate); margin-bottom:8px">${esc(i.produto.nome)}</p>
       <div class="seletor-estrelas" data-produto="${i.produto.id_produto}">
         ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-nota="${n}" onclick="selecionarNota(${i.produto.id_produto}, ${n})">★</button>`).join('')}
       </div>

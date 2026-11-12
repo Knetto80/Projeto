@@ -18,8 +18,8 @@
     </div>
     <div id="mensagem"></div>
     <form id="form-redefinir">
-      <div class="campo"><label>Nova senha (mínimo 8 caracteres)</label><input type="password" id="nova-senha" required minlength="8" autocomplete="new-password"></div>
-      <div class="campo"><label>Repita a nova senha</label><input type="password" id="confirma-senha" required minlength="8" autocomplete="new-password"></div>
+      <div class="campo"><label for="nova-senha">Nova senha (mínimo 8 caracteres)</label><input type="password" id="nova-senha" required minlength="8" autocomplete="new-password"></div>
+      <div class="campo"><label for="confirma-senha">Repita a nova senha</label><input type="password" id="confirma-senha" required minlength="8" autocomplete="new-password"></div>
       <button class="botao botao-primario" type="submit">Salvar nova senha</button>
     </form>
     <p class="centro" style="margin-top:20px; font-size:0.85rem"><a href="login.html" style="color:var(--framboesa); font-weight:700">Voltar para o login</a></p>
@@ -42,11 +42,11 @@
     }
     try {
       const r = await api('/auth/redefinir-senha', { method: 'POST', autenticado: false, body: { token, nova_senha: nova } });
-      msg.innerHTML = `<div class="mensagem-sucesso">${r.mensagem}</div>`;
+      msg.innerHTML = `<div class="mensagem-sucesso">${esc(r.mensagem)}</div>`;
       document.getElementById('form-redefinir').style.display = 'none';
       setTimeout(() => (window.location.href = 'login.html'), 2500);
     } catch (err) {
-      msg.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+      msg.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
     }
   });
 </script>

@@ -64,15 +64,15 @@ async function renderizar() {
         .map(
           (i) => `
         <div style="display:flex; gap:12px; align-items:center; padding:12px 0; ${i !== carrinhoAtual.itens[carrinhoAtual.itens.length - 1] ? 'border-bottom:1px solid var(--linha)' : ''}">
-          <img src="${i.produto.imagens[0]?.url_imagem || ''}" alt="${i.produto.nome}" style="width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
+          <img src="${esc(i.produto.imagens[0]?.url_imagem || '')}" alt="${esc(i.produto.nome)}" style="width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
           <div style="flex:1">
-            <div style="font-weight:700; font-size:0.88rem">${i.produto.nome}</div>
+            <div style="font-weight:700; font-size:0.88rem">${esc(i.produto.nome)}</div>
             <div style="color:var(--framboesa); font-weight:700; font-size:0.85rem">${formatarPreco(i.subtotal)}</div>
           </div>
           <div style="display:flex; align-items:center; gap:8px">
-            <button class="icone-botao" style="width:28px;height:28px;background:var(--creme-escuro)" onclick="alterarQuantidade(${i.id_produto}, ${i.quantidade - 1})">−</button>
+            <button class="icone-botao" style="background:var(--creme-escuro)" onclick="alterarQuantidade(${i.id_produto}, ${i.quantidade - 1})">−</button>
             <span style="min-width:16px; text-align:center; font-weight:700; font-size:0.85rem">${i.quantidade}</span>
-            <button class="icone-botao" style="width:28px;height:28px;background:var(--creme-escuro)" onclick="alterarQuantidade(${i.id_produto}, ${i.quantidade + 1})">+</button>
+            <button class="icone-botao" style="background:var(--creme-escuro)" onclick="alterarQuantidade(${i.id_produto}, ${i.quantidade + 1})">+</button>
           </div>
         </div>`
         )
@@ -113,7 +113,7 @@ async function renderizar() {
       <div class="linha-total"><span>Frete</span><span>${freteCalculado?.erro ? '—' : freteCalculado?.frete_gratis ? 'Grátis' : formatarPreco(valorFrete)}</span></div>
       <div class="linha-total destaque"><span>Total a pagar</span><span>${formatarPreco(total)}</span></div>
     </div>
-    ${freteCalculado?.erro ? `<div class="mensagem-erro">${freteCalculado.erro}</div>` : ''}
+    ${freteCalculado?.erro ? `<div class="mensagem-erro">${esc(freteCalculado.erro)}</div>` : ''}
 
     <div id="erro-checkout"></div>
   `;
@@ -131,15 +131,15 @@ function renderizarBlocoEndereco() {
   const bloco = document.getElementById('bloco-endereco');
   if (mostrandoNovoEndereco) {
     bloco.innerHTML = `
-      <div class="campo"><label>CEP</label><input id="novo-cep" placeholder="00000-000"></div>
-      <div class="campo"><label>Logradouro</label><input id="novo-logradouro" placeholder="Rua das Flores"></div>
+      <div class="campo"><label for="novo-cep">CEP</label><input id="novo-cep" placeholder="00000-000"></div>
+      <div class="campo"><label for="novo-logradouro">Logradouro</label><input id="novo-logradouro" placeholder="Rua das Flores"></div>
       <div class="campo-linha">
-        <div class="campo"><label>Número</label><input id="novo-numero" placeholder="123"></div>
-        <div class="campo"><label>Bairro</label><input id="novo-bairro" placeholder="Centro"></div>
+        <div class="campo"><label for="novo-numero">Número</label><input id="novo-numero" placeholder="123"></div>
+        <div class="campo"><label for="novo-bairro">Bairro</label><input id="novo-bairro" placeholder="Centro"></div>
       </div>
       <div class="campo-linha">
-        <div class="campo"><label>Cidade</label><input id="novo-cidade" placeholder="São Paulo"></div>
-        <div class="campo" style="max-width:70px"><label>UF</label><input id="novo-uf" maxlength="2" placeholder="SP"></div>
+        <div class="campo"><label for="novo-cidade">Cidade</label><input id="novo-cidade" placeholder="São Paulo"></div>
+        <div class="campo" style="max-width:70px"><label for="novo-uf">UF</label><input id="novo-uf" maxlength="2" placeholder="SP"></div>
       </div>
       <div id="erro-endereco"></div>
       <div style="display:flex; gap:8px">
@@ -156,8 +156,8 @@ function renderizarBlocoEndereco() {
   }
 
   bloco.innerHTML = `
-    <p style="color:var(--chocolate); font-weight:600; margin-bottom:2px">${enderecoSelecionado.logradouro}, ${enderecoSelecionado.numero}</p>
-    <p style="font-size:0.85rem">${enderecoSelecionado.bairro} — ${enderecoSelecionado.cidade}/${enderecoSelecionado.uf} · CEP ${enderecoSelecionado.cep}</p>
+    <p style="color:var(--chocolate); font-weight:600; margin-bottom:2px">${esc(enderecoSelecionado.logradouro)}, ${esc(enderecoSelecionado.numero)}</p>
+    <p style="font-size:0.85rem">${esc(enderecoSelecionado.bairro)} — ${esc(enderecoSelecionado.cidade)}/${esc(enderecoSelecionado.uf)} · CEP ${esc(enderecoSelecionado.cep)}</p>
     <div style="display:flex; gap:8px; margin-top:10px">
       ${enderecosDisponiveis.length > 1 ? `<button class="botao-texto" onclick="mostrarSeletorEndereco()">Trocar endereço</button>` : ''}
       <button class="botao-texto" onclick="mostrandoNovoEndereco=true; renderizarBlocoEndereco()">+ Novo endereço</button>
@@ -172,7 +172,7 @@ function mostrarSeletorEndereco() {
       (e) => `
     <label style="display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--linha); align-items:flex-start">
       <input type="radio" name="endereco" style="margin-top:4px" ${e.id_endereco === enderecoSelecionado.id_endereco ? 'checked' : ''} onchange='selecionarEndereco(${e.id_endereco})'>
-      <span style="font-size:0.88rem"><strong>${e.logradouro}, ${e.numero}</strong><br>${e.bairro} — ${e.cidade}/${e.uf} · CEP ${e.cep}</span>
+      <span style="font-size:0.88rem"><strong>${esc(e.logradouro)}, ${esc(e.numero)}</strong><br>${esc(e.bairro)} — ${esc(e.cidade)}/${esc(e.uf)} · CEP ${esc(e.cep)}</span>
     </label>`
     )
     .join('') + `<button class="botao-texto" style="margin-top:8px" onclick="renderizarBlocoEndereco()">Fechar</button>`;
@@ -204,7 +204,7 @@ async function salvarNovoEndereco() {
     await renderizar();
     mostrarToast('Endereço cadastrado ✓', 'sucesso');
   } catch (err) {
-    document.getElementById('erro-endereco').innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    document.getElementById('erro-endereco').innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 }
 
@@ -221,7 +221,7 @@ async function alterarQuantidade(idProduto, novaQtd) {
       try {
         carrinhoAtual = await api(`/carrinho/itens/${idProduto}`, { method: 'PUT', body: { quantidade: max } });
         await renderizar();
-        mostrarToast(`${err.message} Ajustamos para o máximo disponível.`, 'erro');
+        mostrarToast(`${esc(err.message)} Ajustamos para o máximo disponível.`, 'erro');
         return;
       } catch { /* cai no toast padrão */ }
     }
@@ -238,7 +238,7 @@ async function aplicarCupom() {
     mostrarToast('Cupom aplicado ✓', 'sucesso');
   } catch (err) {
     document.getElementById('campo-cupom').value = ''; // wireframe SP1: limpa o campo
-    document.getElementById('erro-cupom').innerHTML = `<div class="mensagem-erro" style="margin-top:8px">${err.message}</div>`;
+    document.getElementById('erro-cupom').innerHTML = `<div class="mensagem-erro" style="margin-top:8px">${esc(err.message)}</div>`;
   }
 }
 
@@ -261,7 +261,7 @@ async function finalizarCompra() {
     });
     window.location.href = `pedido.html?id=${resultado.pedido.id_pedido}&novo=1`;
   } catch (err) {
-    erroBox.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 }
 

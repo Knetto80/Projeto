@@ -25,7 +25,7 @@ document.getElementById('form-login-admin').addEventListener('submit', async (e)
     verificarAcessoAdmin();
     mudarAbaAdmin('produtos');
   } catch (err) {
-    erroBox.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 });
 
@@ -55,10 +55,10 @@ async function carregarProdutosAdmin() {
         (p) => `
       <div class="cartao">
         <div style="display:flex; gap:12px">
-          <img src="${p.imagens[0]?.url_imagem || ''}" style="width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
+          <img src="${esc(p.imagens[0]?.url_imagem || '')}" style="width:56px;height:56px;border-radius:10px;object-fit:cover;background:var(--creme-escuro)">
           <div style="flex:1">
             <div style="display:flex; justify-content:space-between; align-items:flex-start">
-              <strong style="font-size:0.92rem">${p.nome}</strong>
+              <strong style="font-size:0.92rem">${esc(p.nome)}</strong>
               <span class="etiqueta-status ${p.ativo && p.quantidade_estoque > 0 ? 'entregue' : 'cancelado'}">${p.ativo ? (p.quantidade_estoque > 0 ? 'Disponível' : 'Sem estoque') : 'Inativo'}</span>
             </div>
             <p style="font-size:0.82rem; margin:4px 0">${formatarPreco(p.preco)} · Estoque: ${p.quantidade_estoque} un.</p>
@@ -90,20 +90,20 @@ function mostrarFormNovoProduto() {
     <div class="cartao">
       <h3>Novo cupcake</h3>
       <div id="erro-novo-produto"></div>
-      <div class="campo"><label>Nome</label><input id="np-nome"></div>
-      <div class="campo"><label>Categoria</label><select id="np-categoria"></select></div>
-      <div class="campo"><label>Descrição</label><textarea id="np-descricao" rows="2"></textarea></div>
-      <div class="campo"><label>Ingredientes</label><textarea id="np-ingredientes" rows="2"></textarea></div>
-      <div class="campo"><label>Alérgenos</label><input id="np-alergenos"></div>
+      <div class="campo"><label for="np-nome">Nome</label><input id="np-nome"></div>
+      <div class="campo"><label for="np-categoria">Categoria</label><select id="np-categoria"></select></div>
+      <div class="campo"><label for="np-descricao">Descrição</label><textarea id="np-descricao" rows="2"></textarea></div>
+      <div class="campo"><label for="np-ingredientes">Ingredientes</label><textarea id="np-ingredientes" rows="2"></textarea></div>
+      <div class="campo"><label for="np-alergenos">Alérgenos</label><input id="np-alergenos"></div>
       <div class="campo-linha">
-        <div class="campo"><label>Preço (R$)</label><input type="number" step="0.01" min="0.01" id="np-preco"></div>
-        <div class="campo"><label>Estoque inicial</label><input type="number" min="0" id="np-estoque"></div>
+        <div class="campo"><label for="np-preco">Preço (R$)</label><input type="number" step="0.01" min="0.01" id="np-preco"></div>
+        <div class="campo"><label for="np-estoque">Estoque inicial</label><input type="number" min="0" id="np-estoque"></div>
       </div>
       <button class="botao botao-primario" onclick="salvarNovoProduto()">Salvar cupcake</button>
     </div>
   `;
   api('/categorias', { autenticado: false }).then((categorias) => {
-    document.getElementById('np-categoria').innerHTML = categorias.map((c) => `<option value="${c.id_categoria}">${c.nome}</option>`).join('');
+    document.getElementById('np-categoria').innerHTML = categorias.map((c) => `<option value="${c.id_categoria}">${esc(c.nome)}</option>`).join('');
   });
 }
 
@@ -127,7 +127,7 @@ async function salvarNovoProduto() {
     mostrarToast('Cupcake cadastrado ✓', 'sucesso');
     carregarProdutosAdmin();
   } catch (err) {
-    erroBox.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 }
 
@@ -151,7 +151,7 @@ async function carregarPedidosAdmin() {
       return `
       <div class="cartao">
         <div class="cabecalho-pedido">
-          <span class="numero">${p.numero_pedido}</span>
+          <span class="numero">${esc(p.numero_pedido)}</span>
           <span class="etiqueta-status ${p.status_pedido === 'ENTREGUE' ? 'entregue' : p.status_pedido === 'CANCELADO' ? 'cancelado' : ''}">${RÓTULOS[p.status_pedido]}</span>
         </div>
         <p style="font-size:0.82rem">${new Date(p.data_pedido).toLocaleString('pt-BR')} · ${formatarPreco(p.valor_total)}</p>

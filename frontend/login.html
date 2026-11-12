@@ -26,30 +26,30 @@
     <div id="erro-form"></div>
 
     <form id="form-login">
-      <div class="campo"><label>E-mail</label><input type="email" id="login-email" required autocomplete="email"></div>
-      <div class="campo"><label>Senha</label><input type="password" id="login-senha" required autocomplete="current-password"></div>
+      <div class="campo"><label for="login-email">E-mail</label><input type="email" id="login-email" required autocomplete="email"></div>
+      <div class="campo"><label for="login-senha">Senha</label><input type="password" id="login-senha" required autocomplete="current-password"></div>
       <button class="botao botao-primario" type="submit">Entrar</button>
-      <p class="centro" style="margin-top:14px"><a href="#" id="link-esqueci" style="color:var(--framboesa); font-weight:700; font-size:0.85rem">Esqueci minha senha</a></p>
+      <p class="centro" style="margin-top:14px"><a href="#" id="link-esqueci" class="link-acao" style="color:var(--framboesa); font-weight:700; font-size:0.85rem">Esqueci minha senha</a></p>
     </form>
 
     <form id="form-recuperar" style="display:none">
       <h2>Recuperar senha</h2>
       <p>Informe o e-mail da sua conta. Enviaremos um link válido por 60 minutos.</p>
-      <div class="campo"><label>E-mail</label><input type="email" id="rec-email" required autocomplete="email"></div>
+      <div class="campo"><label for="rec-email">E-mail</label><input type="email" id="rec-email" required autocomplete="email"></div>
       <button class="botao botao-primario" type="submit">Enviar link de recuperação</button>
-      <p class="centro" style="margin-top:14px"><a href="#" id="link-voltar" style="color:var(--framboesa); font-weight:700; font-size:0.85rem">← Voltar para o login</a></p>
+      <p class="centro" style="margin-top:14px"><a href="#" id="link-voltar" class="link-acao" style="color:var(--framboesa); font-weight:700; font-size:0.85rem">← Voltar para o login</a></p>
       <div id="resultado-recuperacao" style="margin-top:14px"></div>
     </form>
 
     <form id="form-cadastro" style="display:none">
-      <div class="campo"><label>Nome completo</label><input type="text" id="cad-nome" required autocomplete="name"></div>
-      <div class="campo"><label>E-mail</label><input type="email" id="cad-email" required autocomplete="email"></div>
-      <div class="campo"><label>Senha (mínimo 8 caracteres)</label><input type="password" id="cad-senha" required minlength="8" autocomplete="new-password"></div>
+      <div class="campo"><label for="cad-nome">Nome completo</label><input type="text" id="cad-nome" required autocomplete="name"></div>
+      <div class="campo"><label for="cad-email">E-mail</label><input type="email" id="cad-email" required autocomplete="email"></div>
+      <div class="campo"><label for="cad-senha">Senha (mínimo 8 caracteres)</label><input type="password" id="cad-senha" required minlength="8" autocomplete="new-password"></div>
       <button class="botao botao-primario" type="submit">Criar conta</button>
     </form>
 
     <p class="centro" style="margin-top:20px; font-size:0.8rem">
-      Painel administrativo? <a href="admin.html" style="color:var(--framboesa); font-weight:700">Acessar aqui</a>
+      Painel administrativo? <a href="admin.html" class="link-acao" style="color:var(--framboesa); font-weight:700">Acessar aqui</a>
     </p>
   </div>
 </div>

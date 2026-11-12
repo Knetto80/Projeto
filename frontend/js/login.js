@@ -28,7 +28,7 @@ document.getElementById('form-login').addEventListener('submit', async (e) => {
     Sessao.salvar(sessao);
     redirecionarAposLogin();
   } catch (err) {
-    erroBox.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 });
 
@@ -50,7 +50,7 @@ document.getElementById('form-cadastro').addEventListener('submit', async (e) =>
     mostrarToast('Conta criada com sucesso! Bem-vindo(a) 🎉', 'sucesso');
     redirecionarAposLogin();
   } catch (err) {
-    erroBox.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 });
 
@@ -71,12 +71,12 @@ document.getElementById('form-recuperar').addEventListener('submit', async (e) =
   const saida = document.getElementById('resultado-recuperacao');
   try {
     const r = await api('/auth/recuperar-senha', { method: 'POST', autenticado: false, body: { email: document.getElementById('rec-email').value.trim() } });
-    saida.innerHTML = `<div class="mensagem-sucesso">${r.mensagem}</div>` +
+    saida.innerHTML = `<div class="mensagem-sucesso">${esc(r.mensagem)}</div>` +
       (r.link_dev
-        ? `<div class="cartao" style="margin-top:10px"><p style="font-size:0.8rem"><strong>Modo demonstração:</strong> como este protótipo não envia e-mails de verdade, o link da mensagem aparece aqui.</p><a class="botao botao-secundario" href="${r.link_dev}">Abrir link de redefinição</a></div>`
+        ? `<div class="cartao" style="margin-top:10px"><p style="font-size:0.8rem"><strong>Modo demonstração:</strong> como este protótipo não envia e-mails de verdade, o link da mensagem aparece aqui.</p><a class="botao botao-secundario" href="${esc(r.link_dev)}">Abrir link de redefinição</a></div>`
         : '');
   } catch (err) {
-    saida.innerHTML = `<div class="mensagem-erro">${err.message}</div>`;
+    saida.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 });
 

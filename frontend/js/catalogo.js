@@ -49,12 +49,12 @@ async function carregarProdutos() {
       const imagem = p.imagens[0]?.url_imagem || '';
       return `
       <a class="cartao-produto" href="produto.html?id=${p.id_produto}">
-        <div class="imagem"><img src="${imagem}" alt="${p.nome}" loading="lazy"></div>
+        <div class="imagem"><img src="${esc(imagem)}" alt="${esc(p.nome)}" loading="lazy"></div>
         <div class="corpo">
-          <div class="nome">${p.nome}</div>
+          <div class="nome">${esc(p.nome)}</div>
           <div class="rodape-cartao">
             <span class="preco">${formatarPreco(p.preco)}</span>
-            <button class="botao-add" data-id="${p.id_produto}" aria-label="Adicionar ${p.nome} ao carrinho" onclick="event.preventDefault(); adicionarRapido(${p.id_produto})">
+            <button class="botao-add" data-id="${p.id_produto}" aria-label="Adicionar ${esc(p.nome)} ao carrinho" onclick="event.preventDefault(); adicionarRapido(${p.id_produto})">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 5v14M5 12h14"/></svg>
             </button>
           </div>

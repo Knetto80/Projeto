@@ -28,6 +28,7 @@
   --raio-pequeno: 10px;
   --sombra: 0 6px 20px rgba(59, 36, 24, 0.10);
   --max-largura: 480px;
+  --nav-h: 64px; /* altura da barra de navegação inferior */
 }
 
 * { box-sizing: border-box; }
@@ -52,7 +53,7 @@ body {
   min-height: 100vh;
   background: var(--creme);
   position: relative;
-  padding-bottom: 84px; /* espaço para nav inferior */
+  padding-bottom: calc(var(--nav-h) + 28px + env(safe-area-inset-bottom, 0px)); /* espaço para a nav inferior */
 }
 
 a { color: inherit; text-decoration: none; }
@@ -111,8 +112,8 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   position: relative;
   background: none;
   border: none;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -127,10 +128,10 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   right: -2px;
   background: var(--framboesa);
   color: #fff;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  min-width: 17px;
-  height: 17px;
+  min-width: 18px;
+  height: 18px;
   border-radius: 9px;
   display: flex;
   align-items: center;
@@ -153,6 +154,7 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   border-top: 1px solid var(--linha);
   display: flex;
   z-index: 30;
+  min-height: var(--nav-h);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
@@ -161,9 +163,10 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3px;
-  padding: 10px 0 8px;
-  font-size: 0.68rem;
+  padding: 6px 0;
+  font-size: 0.75rem;
   color: var(--chocolate-suave);
   font-weight: 600;
 }
@@ -183,6 +186,7 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   padding: 11px 14px;
 }
 .busca input {
+  min-height: 44px;
   border: none;
   outline: none;
   background: transparent;
@@ -202,6 +206,10 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
 .filtros::-webkit-scrollbar { display: none; }
 
 .chip {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   padding: 8px 16px;
   border-radius: 999px;
@@ -245,8 +253,8 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   color: #fff;
   border: none;
   border-radius: 999px;
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -282,7 +290,8 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
 .botao-primario:active { background: var(--framboesa-escura); }
 .botao-primario:disabled { background: var(--linha); color: var(--chocolate-suave); }
 .botao-secundario { background: var(--papel); color: var(--chocolate); border: 1.5px solid var(--linha); }
-.botao-texto { background: none; color: var(--framboesa); font-weight: 700; padding: 8px; width: auto; }
+.botao-texto { background: none; color: var(--framboesa); font-weight: 700; padding: 8px; width: auto; min-height: 44px; }
+.link-acao { display: inline-block; padding: 12px 10px; }
 
 /* --- Formulários ------------------------------------------------------- */
 .campo { margin-bottom: 14px; }
@@ -298,6 +307,7 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
   border: 1.5px solid var(--linha);
   border-radius: var(--raio-pequeno);
   padding: 12px 14px;
+  min-height: 46px;
   font-size: 0.92rem;
   background: var(--papel);
   color: var(--chocolate);
@@ -356,7 +366,8 @@ p { line-height: 1.5; margin: 0 0 8px; color: var(--chocolate-suave); }
 /* --- Barra fixa inferior de ação (checkout, add ao carrinho) ----------- */
 .barra-acao {
   position: sticky;
-  bottom: 0;
+  /* fica ACIMA da barra de navegação fixa (antes ela cobria o botão principal) */
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(to top, var(--creme) 65%, transparent);
   padding: 16px 20px 20px;
   margin: 0 -20px;

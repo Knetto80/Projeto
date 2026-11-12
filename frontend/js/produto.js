@@ -22,11 +22,11 @@ async function carregarProduto() {
   container.innerHTML = `
     <div class="cartao" style="padding:0; overflow:hidden">
       <div style="aspect-ratio:1/1; background:var(--creme-escuro)">
-        <img src="${imagem}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;display:block">
+        <img src="${esc(imagem)}" alt="${esc(p.nome)}" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
     </div>
 
-    <h1>${p.nome}</h1>
+    <h1>${esc(p.nome)}</h1>
     <div class="estrelas" style="margin-bottom:10px">
       ${p.avaliacao.total > 0
         ? `${estrelas(p.avaliacao.media)} <span style="color:var(--chocolate-suave)">${p.avaliacao.media} (${p.avaliacao.total} avaliações)</span>`
@@ -37,11 +37,11 @@ async function carregarProduto() {
     </div>
 
     <h3>Descrição</h3>
-    <p>${p.descricao}</p>
+    <p>${esc(p.descricao)}</p>
 
     <h3>Ingredientes &amp; alérgenos</h3>
-    <p>${p.ingredientes}</p>
-    ${p.alergenos ? `<p style="color:var(--alerta); font-weight:700; font-size:0.85rem">⚠ ${p.alergenos}</p>` : ''}
+    <p>${esc(p.ingredientes)}</p>
+    ${p.alergenos ? `<p style="color:var(--alerta); font-weight:700; font-size:0.85rem">⚠ ${esc(p.alergenos)}</p>` : ''}
 
     ${semEstoque
       ? `<div class="mensagem-erro">Este cupcake está indisponível no momento.</div>`

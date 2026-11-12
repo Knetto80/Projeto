@@ -32,7 +32,7 @@ async function carregarPedidos() {
       (p) => `
     <a class="cartao cartao-pedido" href="pedido.html?id=${p.id_pedido}">
       <div class="cabecalho-pedido">
-        <span class="numero">${p.numero_pedido}</span>
+        <span class="numero">${esc(p.numero_pedido)}</span>
         <span class="etiqueta-status ${classeStatus(p.status_pedido)}">${RÓTULOS_STATUS[p.status_pedido]}</span>
       </div>
       <p style="font-size:0.82rem; margin-bottom:8px">

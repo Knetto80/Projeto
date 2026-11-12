@@ -59,6 +59,11 @@ async function api(caminho, { method = 'GET', body, autenticado = true } = {}) {
   return data;
 }
 
+/** Escapa texto antes de inserir em innerHTML (evita XSS). Use em TODO dado vindo do usuário/servidor. */
+function esc(valor) {
+  return String(valor ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 function formatarPreco(valor) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
@@ -93,6 +98,8 @@ async function atualizarBadgeCarrinho() {
     const qtd = carrinho.itens.reduce((s, i) => s + i.quantidade, 0);
     badge.textContent = qtd;
     badge.style.display = qtd > 0 ? 'flex' : 'none';
+    // o nome acessível precisa conter o número visível no selo (WCAG 2.5.3)
+    badge.parentElement.setAttribute('aria-label', qtd > 0 ? `Carrinho (${qtd})` : 'Carrinho');
   } catch {
     /* silencioso — badge é cosmético */
   }
