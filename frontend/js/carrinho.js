@@ -85,7 +85,7 @@ async function renderizar() {
     <h3>🏷️ Cupom de desconto</h3>
     <div class="cartao">
       <div style="display:flex; gap:8px">
-        <input id="campo-cupom" placeholder="Ex: CUPCAKE10" style="flex:1; min-height:46px; border:1.5px solid var(--linha); border-radius:10px; padding:12px 14px; text-transform:uppercase" value="${cupomAplicado ? cupomAplicado.cupom.codigo : ''}" ${cupomAplicado ? 'disabled' : ''}>
+        <input id="campo-cupom" placeholder="Ex: CUPCAKE10" style="flex:1; min-width:0; min-height:46px; border:1.5px solid var(--linha); border-radius:10px; padding:12px 14px; text-transform:uppercase" value="${cupomAplicado ? cupomAplicado.cupom.codigo : ''}" ${cupomAplicado ? 'disabled' : ''}>
         ${cupomAplicado
           ? `<button class="botao botao-secundario" style="width:auto; min-height:46px; padding:12px 16px" onclick="removerCupom()">Remover</button>`
           : `<button class="botao botao-primario" style="width:auto; min-height:46px; padding:12px 16px" onclick="aplicarCupom()">Aplicar</button>`}
