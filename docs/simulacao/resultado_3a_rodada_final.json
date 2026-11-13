@@ -1,0 +1,267 @@
+[
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Criou a conta e chegou ao catálogo sem dificuldade."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Catálogo: todos os alvos de toque têm pelo menos 44 px."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Busca por \"choc\" retornou 1 produto(s)."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Tela do produto — botão \"Adicionar ao Carrinho\" ao abrir a tela: visível."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Tela do produto — botão depois de rolar até o fim: visível."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Detalhes do produto: todos os alvos de toque têm pelo menos 44 px."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Carrinho — botão \"Finalizar e Pagar\" ao abrir a tela: visível."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Sem endereço, o botão de finalizar fica desabilitado (correto)."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Carrinho: todos os alvos de toque têm pelo menos 44 px."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Cupom digitado em minúsculas foi aceito."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Carrinho — botão \"Finalizar\" depois de rolar até o fim: visível."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Finalizou o pedido e viu a linha do tempo de acompanhamento."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "\"Repetir pedido\": 2 item(ns) adicionados ao carrinho ✓."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "OK",
+  "txt": "Nenhuma tela com rolagem horizontal indesejada."
+ },
+ {
+  "p": "P1 Ana (iPhone SE 375×667)",
+  "tipo": "NAO_TESTADO",
+  "txt": "Avaliação do pedido (o pedido não chegou a \"Entregue\" durante a sessão) e painel do administrador."
+ },
+ {
+  "p": "P2 Carlos (Android 360×640, rede lenta)",
+  "tipo": "OK",
+  "txt": "Catálogo apareceu em 2.1s com rede lenta (latência 400 ms, ~60 KB/s)."
+ },
+ {
+  "p": "P2 Carlos (Android 360×640, rede lenta)",
+  "tipo": "OK",
+  "txt": "Sem internet ao adicionar um item, a mensagem exibida foi: \"Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.\"."
+ },
+ {
+  "p": "P2 Carlos (Android 360×640, rede lenta)",
+  "tipo": "OK",
+  "txt": "Duas finalizações simultâneas do mesmo carrinho (clique duplo): 1 pedido(s) criado(s) (respostas 201/422); estoque baixou 2 unidade(s) para uma compra de 2."
+ },
+ {
+  "p": "P2 Carlos (Android 360×640, rede lenta)",
+  "tipo": "OK",
+  "txt": "Voltar ao carrinho depois do pedido mostra: Seu carrinho está vazio."
+ },
+ {
+  "p": "P2 Carlos (Android 360×640, rede lenta)",
+  "tipo": "NAO_TESTADO",
+  "txt": "Pagamento com cartão/dinheiro e histórico de pedidos."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Ordem do Tab na tela de login: aba-login → aba-cadastro → login-email → login-senha → Entrar → link-esqueci."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "O foco do teclado fica visível nos elementos."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Entrou usando apenas o teclado (Enter envia o formulário)."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "SUGESTAO",
+  "txt": "No computador o aplicativo ocupa só 480 px no centro da tela de 1366 px (layout de celular). Aceitável para um app mobile-first, mas sobra espaço vazio."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Login: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Catálogo: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Detalhes do produto: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Carrinho: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Histórico de pedidos: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Perfil: verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P3 Marina (desktop 1366×768, teclado + acessibilidade)",
+  "tipo": "OK",
+  "txt": "Painel admin (acesso): verificador de acessibilidade (axe, WCAG 2.1 AA) sem violações."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Nome com código HTML não foi executado no Perfil."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "HTML no nome do produto não foi executado no catálogo."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Nome com 300 caracteres no cadastro → HTTP 422."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "E-mail inválido (\"isto-nao-e-email\") enviado direto à API → HTTP 422."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Endereço com CEP \"abc\" e UF \"XX\" → HTTP 422."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Quantidade \"abc\" no carrinho → HTTP 422."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Cálculo de frete com CEP \"abc\" → HTTP 422."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Busca com injeção de SQL (\"' OR 1=1 --\") → HTTP 200, 0 resultado(s) (consulta parametrizada resiste)."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Abrir por URL o pedido de outra pessoa → HTTP 404."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Rota de administrador sem login → HTTP 401."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "OK",
+  "txt": "Token forjado com o segredo padrão foi recusado."
+ },
+ {
+  "p": "P4 Diego (desenvolvedor curioso, entradas inválidas)",
+  "tipo": "NAO_TESTADO",
+  "txt": "Interface visual em celular; fluxo feliz de compra (foco foi tentar quebrar)."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Entrou no painel do administrador."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Cadastro com preço R$ 0,00: \"Preço deve ser maior que R$ 0,00 (RN#2).\"."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Cadastrou um novo cupcake com sucesso e ele apareceu na lista."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Estoque -5 digitado: \"Estoque deve ser um número inteiro entre 0 e 100.000 (não pode ser negativo).\"."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "SUGESTAO",
+  "txt": "Na lista de produtos só dá para alterar o ESTOQUE: não há botão para editar preço/descrição nem para desativar um produto."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Card do pedido no painel — mostra itens: sim; endereço: sim; cliente: sim; forma de pagamento: sim. (Conteúdo visto: \"PED-2026-003 Recebido 13/11/2026, 02:47:48 · R$ 78,50 · Dinheiro na entrega Cliente da Júl…\")"
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "SUGESTAO",
+  "txt": "Não há filtro de pedidos por status (a lista mistura pedidos novos e antigos)."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Cancelar pedido pediu confirmação."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "OK",
+  "txt": "Painel admin (tablet): todos os alvos de toque têm pelo menos 44 px."
+ },
+ {
+  "p": "P5 Júlia (confeiteira/admin, tablet 768×1024)",
+  "tipo": "NAO_TESTADO",
+  "txt": "Avançar o pedido pelas 4 etapas completas depois do cancelamento (o pedido de teste foi cancelado) e relatórios de vendas (não existem)."
+ }
+]
