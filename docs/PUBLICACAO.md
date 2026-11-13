@@ -42,7 +42,8 @@ Siga `docs/GIT.md` e deixe o repositório publicado.
 | `DB_NAME` | `defaultdb` (ou o nome informado) |
 | `DB_SSL` | `true` |
 | `DB_SSL_REJECT_UNAUTHORIZED` | `false` |
-| `JWT_SECRET` | uma frase longa e aleatória (**não** use a padrão) |
+| `NODE_ENV` | `production` |
+| `JWT_SECRET` | uma frase longa e aleatória (**obrigatório**: em produção o servidor se recusa a iniciar com o segredo padrão) |
 | `ADMIN_PASSWORD` | uma senha **sua** para o administrador (**não** deixe `admin1234` em site público) |
 | `EMAIL_SIMULADO` | `true` (o link de recuperação aparece na tela; não há envio de e-mail) |
 

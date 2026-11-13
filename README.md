@@ -5,7 +5,7 @@ E-commerce de confeitaria artesanal — **Projeto Integrador Transdisciplinar em
 
 Aplicação completa em três camadas: **front-end** mobile-first (HTML/CSS/JS), **back-end** Node.js/Express
 no padrão **MVC** e banco de dados **MySQL 8**. Cobre as **18 histórias de usuário** do planejamento (SP1) e
-possui **21 testes automatizados de integração**.
+possui **25 testes automatizados de integração**.
 
 ## Executar (3 minutos)
 
@@ -29,7 +29,7 @@ Abra **http://localhost:3000**.
 | CEP na área / fora da área | `01310-100` / `20000-009` |
 
 ```bash
-npm test             # 21 testes de integração (usa o banco cupcakes_gourmet_test)
+npm test             # 25 testes de integração (usa o banco cupcakes_gourmet_test)
 npm run db:reset     # apaga e recria o banco (volta aos dados de demonstração)
 ```
 
@@ -76,6 +76,7 @@ O front-end não usa frameworks: é HTML/CSS/JavaScript puro.
 | `Registro_de_Revisao_e_Feedback.docx` | Melhoria contínua PI1 → SP1 → SP2 → SP3, feedback de colegas e checklist de entrega |
 | `Laudo_de_Teste_TEMPLATE.docx` | Formulário para os 5 colegas testadores (SP3) |
 | `Roteiros_dos_Videos.docx` | Roteiros dos vídeos da SP2 e da SP3 |
+| `simulacao/` | Código e resultados da **simulação** de 5 personas testando o sistema (não substitui testadores reais) |
 | `GIT.md` | Como publicar no GitHub e entregar o link ao tutor |
 | `PUBLICACAO.md` | Como publicar o sistema na internet (Render + Aiven) para os testes da SP3 |
 | `planejamento/` | Documentos de planejamento do PI1 e da SP1 |
