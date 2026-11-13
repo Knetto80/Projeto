@@ -33,11 +33,19 @@ async function api(caminho, { method = 'GET', body, autenticado = true } = {}) {
   if (autenticado && Sessao.obterToken()) {
     headers.Authorization = `Bearer ${Sessao.obterToken()}`;
   }
-  const resp = await fetch(API_BASE + caminho, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  let resp;
+  try {
+    resp = await fetch(API_BASE + caminho, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch {
+    // sem internet / servidor fora do ar (antes aparecia o texto técnico "Failed to fetch")
+    const erroRede = new Error('Não foi possível conectar ao servidor. Verifique sua internet e tente novamente.');
+    erroRede.status = 0;
+    throw erroRede;
+  }
 
   let data = null;
   try {
@@ -98,8 +106,9 @@ async function atualizarBadgeCarrinho() {
     const qtd = carrinho.itens.reduce((s, i) => s + i.quantidade, 0);
     badge.textContent = qtd;
     badge.style.display = qtd > 0 ? 'flex' : 'none';
-    // o nome acessível precisa conter o número visível no selo (WCAG 2.5.3)
-    badge.parentElement.setAttribute('aria-label', qtd > 0 ? `Carrinho (${qtd})` : 'Carrinho');
+    // O selo é só visual (aria-hidden); o leitor de tela lê "Carrinho, 2 itens" (WCAG 2.5.3)
+    badge.setAttribute('aria-hidden', 'true');
+    badge.parentElement.setAttribute('aria-label', qtd > 0 ? `Carrinho, ${qtd} ${qtd === 1 ? 'item' : 'itens'}` : 'Carrinho');
   } catch {
     /* silencioso — badge é cosmético */
   }

@@ -132,6 +132,7 @@ async function salvarNovoProduto() {
 }
 
 // --- Pedidos (US-15) ---------------------------------------------------------
+const PAGAMENTOS = { PIX: 'PIX', CARTAO_CREDITO: 'Cartão de crédito', DINHEIRO: 'Dinheiro na entrega' };
 const STATUS_SEQUENCIA = ['RECEBIDO', 'EM_PRODUCAO', 'SAIU_PARA_ENTREGA', 'ENTREGUE'];
 const RÓTULOS = { RECEBIDO: 'Recebido', EM_PRODUCAO: 'Em produção', SAIU_PARA_ENTREGA: 'Saiu para entrega', ENTREGUE: 'Entregue', CANCELADO: 'Cancelado' };
 
@@ -154,7 +155,10 @@ async function carregarPedidosAdmin() {
           <span class="numero">${esc(p.numero_pedido)}</span>
           <span class="etiqueta-status ${p.status_pedido === 'ENTREGUE' ? 'entregue' : p.status_pedido === 'CANCELADO' ? 'cancelado' : ''}">${RÓTULOS[p.status_pedido]}</span>
         </div>
-        <p style="font-size:0.82rem">${new Date(p.data_pedido).toLocaleString('pt-BR')} · ${formatarPreco(p.valor_total)}</p>
+        <p style="font-size:0.82rem">${new Date(p.data_pedido).toLocaleString('pt-BR')} · ${formatarPreco(p.valor_total)} · ${esc(PAGAMENTOS[p.forma_pagamento] || p.forma_pagamento)}</p>
+        <p style="font-size:0.88rem; color:var(--chocolate); margin:6px 0 2px"><strong>${esc(p.cliente.nome)}</strong> <span style="color:var(--chocolate-suave)">· ${esc(p.cliente.email)}</span></p>
+        <ul style="margin:4px 0 6px 18px; padding:0; font-size:0.88rem; color:var(--chocolate)">${p.itens.map((i) => `<li>${i.quantidade}× ${esc(i.produto.nome)}</li>`).join('')}</ul>
+        <p style="font-size:0.82rem">📍 ${esc(p.endereco.logradouro)}, ${esc(p.endereco.numero)} — ${esc(p.endereco.bairro)}, ${esc(p.endereco.cidade)}/${esc(p.endereco.uf)} · CEP ${esc(p.endereco.cep)}</p>
         <div style="display:flex; gap:8px; margin-top:10px">
           ${proximo ? `<button class="botao botao-secundario" style="width:auto; padding:9px 14px; font-size:0.82rem" onclick="mudarStatusPedido(${p.id_pedido}, '${proximo}')">Avançar → ${RÓTULOS[proximo]}</button>` : ''}
           ${p.status_pedido !== 'ENTREGUE' && p.status_pedido !== 'CANCELADO' ? `<button class="botao-texto" style="color:var(--alerta)" onclick="mudarStatusPedido(${p.id_pedido}, 'CANCELADO')">Cancelar</button>` : ''}
@@ -165,6 +169,7 @@ async function carregarPedidosAdmin() {
 }
 
 async function mudarStatusPedido(idPedido, novoStatus) {
+  if (novoStatus === 'CANCELADO' && !window.confirm('Cancelar este pedido?\n\nOs itens voltam ao estoque e esta ação não pode ser desfeita.')) return;
   try {
     await api(`/admin/pedidos/${idPedido}/status`, { method: 'PUT', body: { status: novoStatus } });
     mostrarToast('Status do pedido atualizado ✓', 'sucesso');

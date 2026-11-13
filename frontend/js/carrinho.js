@@ -85,10 +85,10 @@ async function renderizar() {
     <h3>🏷️ Cupom de desconto</h3>
     <div class="cartao">
       <div style="display:flex; gap:8px">
-        <input id="campo-cupom" placeholder="Ex: CUPCAKE10" style="flex:1; border:1.5px solid var(--linha); border-radius:10px; padding:12px 14px; text-transform:uppercase" value="${cupomAplicado ? cupomAplicado.cupom.codigo : ''}" ${cupomAplicado ? 'disabled' : ''}>
+        <input id="campo-cupom" placeholder="Ex: CUPCAKE10" style="flex:1; min-height:46px; border:1.5px solid var(--linha); border-radius:10px; padding:12px 14px; text-transform:uppercase" value="${cupomAplicado ? cupomAplicado.cupom.codigo : ''}" ${cupomAplicado ? 'disabled' : ''}>
         ${cupomAplicado
-          ? `<button class="botao botao-secundario" style="width:auto; padding:12px 16px" onclick="removerCupom()">Remover</button>`
-          : `<button class="botao botao-primario" style="width:auto; padding:12px 16px" onclick="aplicarCupom()">Aplicar</button>`}
+          ? `<button class="botao botao-secundario" style="width:auto; min-height:46px; padding:12px 16px" onclick="removerCupom()">Remover</button>`
+          : `<button class="botao botao-primario" style="width:auto; min-height:46px; padding:12px 16px" onclick="aplicarCupom()">Aplicar</button>`}
       </div>
       ${cupomAplicado ? `<p style="color:var(--sucesso); font-weight:700; margin-top:8px; font-size:0.85rem">✓ Desconto aplicado: −${formatarPreco(cupomAplicado.valor_desconto)}</p>` : ''}
       <div id="erro-cupom"></div>
@@ -248,6 +248,11 @@ async function removerCupom() {
 }
 
 async function finalizarCompra() {
+  const botao = document.getElementById('botao-finalizar');
+  if (botao.disabled) return; // evita clique duplo gerar dois pedidos
+  const rotuloOriginal = botao.textContent;
+  botao.disabled = true;
+  botao.textContent = 'Processando…';
   const erroBox = document.getElementById('erro-checkout');
   erroBox.innerHTML = '';
   try {
@@ -261,6 +266,8 @@ async function finalizarCompra() {
     });
     window.location.href = `pedido.html?id=${resultado.pedido.id_pedido}&novo=1`;
   } catch (err) {
+    botao.disabled = false;
+    botao.textContent = rotuloOriginal;
     erroBox.innerHTML = `<div class="mensagem-erro">${esc(err.message)}</div>`;
   }
 }
