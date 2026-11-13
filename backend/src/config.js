@@ -37,3 +37,13 @@ module.exports = {
       : undefined,
   },
 };
+
+// O segredo padrão está público no repositório: quem o conhecer consegue forjar um token de
+// administrador. Em produção o servidor se recusa a iniciar com ele.
+const SEGREDOS_FRACOS = ['cupcakes-gourmet-dev-secret', 'troque-esta-chave-em-producao'];
+if (SEGREDOS_FRACOS.includes(module.exports.jwtSecret)) {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('JWT_SECRET inseguro: defina uma chave longa e aleatória na variável de ambiente JWT_SECRET.');
+  }
+  if (process.env.NODE_ENV !== 'test') console.warn('⚠️  Usando JWT_SECRET de desenvolvimento. Defina JWT_SECRET antes de publicar o sistema.');
+}

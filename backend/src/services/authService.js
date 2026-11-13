@@ -4,6 +4,7 @@ const Usuario = require('../models/Usuario');
 const crypto = require('crypto');
 const config = require('../config');
 const RecuperacaoSenha = require('../models/RecuperacaoSenha');
+const v = require('../utils/validacao');
 const { query, transaction } = require('../db/pool');
 
 const JWT_EXPIRA_EM = '24h';
@@ -16,7 +17,9 @@ function erro(status, msg) {
 }
 
 async function cadastrar({ nome, email, senha }) {
-  if (!senha || senha.length < 8) throw erro(422, 'A senha deve ter no mínimo 8 caracteres.');
+  nome = v.texto(nome, 'Nome', { min: 2, max: 100 });
+  email = v.email(email);
+  if (typeof senha !== 'string' || senha.length < 8 || senha.length > 72) throw erro(422, 'A senha deve ter entre 8 e 72 caracteres.');
   if (await Usuario.buscarPorEmail(email)) throw erro(409, 'E-mail já cadastrado.');
   const senha_hash = await bcrypt.hash(senha, 10);
   const usuario = await Usuario.criar({ nome, email, senha_hash });
@@ -75,7 +78,7 @@ async function solicitarRecuperacao({ email, urlBase }) {
 }
 
 async function redefinirSenha({ token, nova_senha }) {
-  if (!nova_senha || nova_senha.length < 8) throw erro(422, 'A nova senha deve ter no mínimo 8 caracteres.');
+  if (typeof nova_senha !== 'string' || nova_senha.length < 8 || nova_senha.length > 72) throw erro(422, 'A nova senha deve ter entre 8 e 72 caracteres.');
   const registro = token ? await RecuperacaoSenha.buscarValido(sha256(String(token))) : null;
   if (!registro) throw erro(422, 'Link inválido, expirado ou já utilizado. Solicite uma nova recuperação.');
   const senha_hash = await bcrypt.hash(nova_senha, 10);

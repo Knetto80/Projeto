@@ -33,6 +33,17 @@ const Pedido = {
         }
       }
 
+      // Consome o carrinho DENTRO da transação: se outra requisição (clique duplo) já finalizou
+      // esta compra, nenhuma linha é apagada e o pedido duplicado é recusado.
+      const consumidos = await query(
+        'DELETE FROM tb_item_carrinho WHERE id_carrinho IN (SELECT id_carrinho FROM tb_carrinho WHERE id_usuario = ?)',
+        [id_usuario],
+        conn
+      );
+      if (consumidos.affectedRows !== itens.length) {
+        throw erro422('Seu carrinho mudou ou este pedido já foi finalizado. Confira o carrinho e tente novamente.', 'CARRINHO_ALTERADO');
+      }
+
       const r = await query(
         `INSERT INTO tb_pedido (id_usuario, id_endereco, id_cupom, numero_pedido, valor_subtotal, valor_desconto, valor_frete, valor_total, forma_pagamento)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -53,11 +64,6 @@ const Pedido = {
       }
 
       await query('INSERT INTO tb_historico_status_pedido (id_pedido, status_anterior, status_novo) VALUES (?, NULL, ?)', [id, 'RECEBIDO'], conn);
-      await query(
-        'DELETE FROM tb_item_carrinho WHERE id_carrinho IN (SELECT id_carrinho FROM tb_carrinho WHERE id_usuario = ?)',
-        [id_usuario],
-        conn
-      );
       return id;
     });
     return this.buscarDetalhado(id_pedido);
@@ -73,6 +79,14 @@ const Pedido = {
     return { ...pedido, itens, historico };
   },
 
+  /** Visão do pedido para a loja: inclui quem comprou e para onde entregar. */
+  async detalharParaAdmin(id_pedido) {
+    const pedido = await this.buscarDetalhado(id_pedido);
+    const [cliente] = await query('SELECT id_usuario, nome, email FROM tb_usuario WHERE id_usuario = ?', [pedido.id_usuario]);
+    const [endereco] = await query('SELECT * FROM tb_endereco WHERE id_endereco = ?', [pedido.id_endereco]);
+    return { ...pedido, cliente, endereco };
+  },
+
   async listarPorUsuario(id_usuario) {
     const ids = await query('SELECT id_pedido FROM tb_pedido WHERE id_usuario = ? ORDER BY data_pedido DESC, id_pedido DESC', [id_usuario]);
     return Promise.all(ids.map((r) => this.buscarDetalhado(r.id_pedido)));
@@ -85,7 +99,7 @@ const Pedido = {
     if (id_usuario) { filtros.push('id_usuario = ?'); params.push(Number(id_usuario)); }
     const where = filtros.length ? `WHERE ${filtros.join(' AND ')}` : '';
     const ids = await query(`SELECT id_pedido FROM tb_pedido ${where} ORDER BY data_pedido DESC, id_pedido DESC`, params);
-    return Promise.all(ids.map((r) => this.buscarDetalhado(r.id_pedido)));
+    return Promise.all(ids.map((r) => this.detalharParaAdmin(r.id_pedido)));
   },
 
   /**

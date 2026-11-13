@@ -8,6 +8,7 @@ process.env.DB_NAME = process.env.DB_NAME_TEST || 'cupcakes_gourmet_test';
 
 const { test, before, after } = require('node:test');
 const assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
 const criarApp = require('../src/app');
 const { inicializarBanco } = require('../src/db/setup');
 const { fechar, query } = require('../src/db/pool');
@@ -61,7 +62,7 @@ test('US-02: cadastra cliente, rejeita senha curta e e-mail duplicado', async ()
   const { email } = await novoCliente();
   const curta = await http('POST', '/api/auth/cadastro', { body: { nome: 'X', email: 'x@x.com', senha: '123' } });
   assert.equal(curta.status, 422);
-  const duplicado = await http('POST', '/api/auth/cadastro', { body: { nome: 'Y', email, senha: '12345678' } });
+  const duplicado = await http('POST', '/api/auth/cadastro', { body: { nome: 'Yara', email, senha: '12345678' } });
   assert.equal(duplicado.status, 409);
 });
 
@@ -325,4 +326,59 @@ test('US-16: recuperação de senha — token de uso único, expira, desbloqueia
   const inexistente = await http('POST', '/api/auth/recuperar-senha', { body: { email: 'nao-existe@x.com' } });
   assert.equal(inexistente.status, 200);
   assert.equal(inexistente.dados.link_dev, undefined); // não revela se o e-mail existe
+});
+
+// ===================== Regressões encontradas na simulação de testadores (SP3) =====================
+test('Regressão: duas finalizações simultâneas (clique duplo) geram um único pedido', async () => {
+  const { token } = await novoCliente();
+  const p = await produtoPorNome('Baunilha Clássica');
+  const antes = p.quantidade_estoque;
+  await http('POST', '/api/carrinho/itens', { token, body: { id_produto: p.id_produto, quantidade: 2 } });
+  const idEndereco = await novoEndereco(token);
+  const [a, b] = await Promise.all([1, 2].map(() => http('POST', '/api/pedidos', { token, body: { id_endereco: idEndereco, forma_pagamento: 'PIX' } })));
+  assert.deepEqual([a.status, b.status].sort(), [201, 422]);
+  assert.equal([a, b].find((r) => r.status === 422).dados.codigo, 'CARRINHO_ALTERADO');
+  assert.equal((await http('GET', '/api/pedidos', { token })).dados.length, 1);
+  assert.equal((await produtoPorNome('Baunilha Clássica')).quantidade_estoque, antes - 2); // baixou só uma vez
+});
+
+test('Regressão: entradas inválidas viram 422/400 — nunca 500 nem dado inválido gravado', async () => {
+  const sufixo = Date.now();
+  const longo = await http('POST', '/api/auth/cadastro', { body: { nome: 'A'.repeat(300), email: `longo${sufixo}@x.com`, senha: '12345678' } });
+  assert.equal(longo.status, 422);
+  const mail = await http('POST', '/api/auth/cadastro', { body: { nome: 'Fulano', email: 'isto-nao-e-email', senha: '12345678' } });
+  assert.equal(mail.status, 422);
+  const { token } = await novoCliente();
+  const end = (cep, uf) => http('POST', '/api/enderecos', { token, body: { cep, logradouro: 'R', numero: '1', bairro: 'B', cidade: 'C', uf } });
+  assert.equal((await end('abc', 'SP')).status, 422);
+  assert.equal((await end('01310-100', 'XX')).status, 422);
+  assert.equal((await end('01310100', 'sp')).dados.cep, '01310-100'); // normaliza CEP e UF
+  const p = await produtoPorNome('Doce de Leite Argentino');
+  await http('POST', '/api/carrinho/itens', { token, body: { id_produto: p.id_produto, quantidade: 1 } });
+  assert.equal((await http('PUT', `/api/carrinho/itens/${p.id_produto}`, { token, body: { quantidade: 'abc' } })).status, 422);
+  assert.equal((await http('POST', '/api/carrinho/itens', { token, body: { id_produto: p.id_produto, quantidade: -3 } })).status, 422);
+  const frete = await http('GET', '/api/frete?cep=abc', { token });
+  assert.equal(frete.status, 422);
+  assert.equal(frete.dados.codigo, 'CEP_INVALIDO');
+  const json = await fetch(`${BASE}/api/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{ quebrado' });
+  assert.equal(json.status, 400);
+});
+
+test('Regressão: painel da loja recebe cliente, endereço e itens do pedido', async () => {
+  const { token } = await novoCliente();
+  const p = await produtoPorNome('Chocolate Belga 70%');
+  await http('POST', '/api/carrinho/itens', { token, body: { id_produto: p.id_produto, quantidade: 2 } });
+  const idEndereco = await novoEndereco(token);
+  await http('POST', '/api/pedidos', { token, body: { id_endereco: idEndereco, forma_pagamento: 'CARTAO_CREDITO' } });
+  const lista = (await http('GET', '/api/admin/pedidos', { token: adminToken })).dados;
+  const ped = lista.find((x) => x.itens.some((i) => i.id_produto === p.id_produto && i.quantidade === 2));
+  assert.ok(ped.cliente.nome && ped.cliente.email);
+  assert.equal(ped.endereco.logradouro, 'Av. Paulista');
+  assert.equal(ped.forma_pagamento, 'CARTAO_CREDITO');
+});
+
+test('Regressão: em produção o servidor recusa o segredo JWT padrão', () => {
+  const rodar = (env) => spawnSync(process.execPath, ['-e', "require('./src/config')"], { cwd: require('node:path').join(__dirname, '..'), env: { ...process.env, ...env }, encoding: 'utf8' });
+  assert.notEqual(rodar({ NODE_ENV: 'production', JWT_SECRET: '' }).status, 0);
+  assert.equal(rodar({ NODE_ENV: 'production', JWT_SECRET: 'uma-chave-longa-e-aleatoria-qualquer-123456' }).status, 0);
 });

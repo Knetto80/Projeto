@@ -28,6 +28,7 @@ services:
       db:
         condition: service_healthy
     environment:
+      NODE_ENV: development   # (o Dockerfile usa production, que exige um JWT_SECRET forte)
       DB_HOST: db
       DB_USER: cupcakes
       DB_PASSWORD: cupcakes123

@@ -1,9 +1,24 @@
 const { query, transaction } = require('../db/pool');
+const v = require('../utils/validacao');
 
 function erro422(msg) {
   const e = new Error(msg);
   e.status = 422;
   return e;
+}
+
+// Tipos/tamanhos dos campos (as mensagens específicas de preço seguem nos métodos).
+function validarCampos(d) {
+  if (d.nome !== undefined) v.texto(d.nome, 'Nome', { max: 100 });
+  if (d.descricao !== undefined) v.texto(d.descricao, 'Descrição', { max: 5000 });
+  if (d.ingredientes !== undefined) v.texto(d.ingredientes, 'Ingredientes', { max: 5000 });
+  if (d.alergenos !== undefined && String(d.alergenos).length > 5000) throw erro422('Alérgenos: texto longo demais.');
+  if (d.id_categoria !== undefined) v.inteiro(d.id_categoria, 'Categoria', { min: 1 });
+  if (d.preco !== undefined && !(Number.isFinite(Number(d.preco)) && Number(d.preco) > 0 && Number(d.preco) <= 99999.99)) throw erro422('Preço deve ser maior que R$ 0,00 e no máximo R$ 99.999,99 (RN#2).');
+  if (d.quantidade_estoque !== undefined && d.quantidade_estoque !== null) {
+    const q = typeof d.quantidade_estoque === 'string' && d.quantidade_estoque.trim() !== '' ? Number(d.quantidade_estoque) : d.quantidade_estoque;
+    if (!Number.isInteger(q) || q < 0 || q > 100000) throw erro422('Estoque deve ser um número inteiro entre 0 e 100.000 (não pode ser negativo).');
+  }
 }
 
 async function anexarImagens(produtos) {
@@ -34,6 +49,7 @@ const CAMPOS_EDITAVEIS = ['id_categoria', 'nome', 'descricao', 'ingredientes', '
 const Produto = {
   async criar({ id_categoria, nome, descricao, ingredientes, alergenos, preco, quantidade_estoque, imagens = [] }) {
     if (!(Number(preco) > 0)) throw erro422('Preço deve ser maior que R$ 0,00 (RN#2).');
+    validarCampos({ id_categoria, nome, descricao, ingredientes, alergenos, preco, quantidade_estoque });
     if (imagens.length === 0) throw erro422('Pelo menos uma imagem é obrigatória (RN#3).');
     if (!nome || !descricao || !ingredientes) throw erro422('Nome, descrição e ingredientes são obrigatórios.');
     try {
@@ -83,6 +99,7 @@ const Produto = {
 
   async atualizar(id_produto, dados) {
     const campos = Object.keys(dados).filter((c) => CAMPOS_EDITAVEIS.includes(c));
+    validarCampos(dados);
     if (dados.preco !== undefined && !(Number(dados.preco) > 0)) throw erro422('Preço deve ser maior que R$ 0,00 (RN#2).');
     if (dados.quantidade_estoque !== undefined && Number(dados.quantidade_estoque) < 0) throw erro422('Estoque não pode ficar negativo.');
     if (campos.length > 0) {
