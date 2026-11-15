@@ -35,3 +35,18 @@ BASE=http://localhost:3000 node sim.js      # grava resultado.json
 
 Observação: o teste "token forjado" só é reprovado se o servidor usar o segredo JWT padrão; inicie com
 `NODE_ENV=production JWT_SECRET=<chave longa> npm start` para simular uma publicação real.
+
+## Execução do roteiro do Laudo de Teste (5 testadores × 13 tarefas)
+
+`roteiro_laudo.js` segue **exatamente** as 13 tarefas do `Laudo_de_Teste_TEMPLATE.docx`, só pela interface
+(toques/cliques e digitação), em 5 perfis de dispositivo (iPhone SE, Android grande, computador, tablet e Android
+pequeno — todos **emulados**). Registra apenas: funcionou, falhou ou não testou. Sem opiniões.
+
+- Resultado: `resultado_roteiro_laudo_5_testadores.json` — **65 de 65 tarefas funcionaram**, 0 erros técnicos.
+- Registrado na seção 3.1 de `docs/Registro_de_Revisao_e_Feedback.docx`.
+- Limites: roteiro conhecido e automatizado, ambiente local, aparelhos emulados. **Não substitui** os laudos de
+  colegas reais.
+
+```bash
+BASE=http://localhost:3000 node roteiro_laudo.js   # grava resultado_roteiro_laudo.json (precisa de playwright)
+```

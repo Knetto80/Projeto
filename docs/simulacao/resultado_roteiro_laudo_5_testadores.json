@@ -1,0 +1,447 @@
+[
+ {
+  "testador": "Testador 1",
+  "dispositivo": "iPhone SE (emulado) 375×667, toque",
+  "navegador": "Chromium 153.0.8010.12",
+  "url": "http://localhost:3000",
+  "inicio": "2026-11-15T21:20:54.911Z",
+  "tarefas": [
+   {
+    "n": 1,
+    "tarefa": "Criar uma conta e entrar no sistema",
+    "detalhe": "Conta criada, sessão encerrada (\"Sair da conta\") e novo login com as mesmas credenciais funcionaram.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 2,
+    "tarefa": "Buscar um cupcake pelo nome e filtrar por categoria",
+    "detalhe": "Busca \"choc\" → 1 resultado (Chocolate Belga 70%); filtro \"Veganos\" → 1 resultado (Vegano de Cenoura); \"Todos\" voltou à lista completa.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 3,
+    "tarefa": "Abrir os detalhes de um produto (ingredientes e alérgenos aparecem?)",
+    "detalhe": "A tela de detalhes mostrou nome, preço, descrição, ingredientes e a linha de alérgenos.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 4,
+    "tarefa": "Adicionar produtos ao carrinho e alterar quantidades",
+    "detalhe": "2 itens no carrinho; ao tocar em \"+\" o subtotal passou de R$ 27.80 para R$ 42.70.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 5,
+    "tarefa": "Tentar colocar mais unidades do que o estoque (mensagem clara?)",
+    "detalhe": "Na tela de detalhes a quantidade parou em 18 (o estoque). Ao tentar somar mais uma unidade no carrinho apareceu: \"Ops! Restam apenas 18 unidades deste cupcake no estoque. Ajustamos para o máximo disponível.\". Depois o item foi removido do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 6,
+    "tarefa": "Cadastrar um endereço de entrega",
+    "detalhe": "Endereço (Av. Paulista, 1578 — CEP 01310-100) salvo e exibido como endereço de entrega.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 7,
+    "tarefa": "Usar um CEP fora da área (CEP 20000-009) — o sistema avisa?",
+    "detalhe": "Aviso exibido: \"Infelizmente não entregamos no CEP informado. Nosso raio máximo é de 30 km.\"; botão \"Finalizar\" ficou desabilitado e voltou a funcionar ao trocar para o endereço válido.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 8,
+    "tarefa": "Aplicar o cupom CUPCAKE10 e conferir o desconto e o total",
+    "detalhe": "Subtotal R$ 42,70, desconto −R$ 4,27 (10%), frete R$ 8,00, total R$ 46,43 — a conta confere.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 9,
+    "tarefa": "Finalizar o pedido e acompanhar o status",
+    "detalhe": "Pedido PED-2026-001 criado; linha do tempo na etapa \"Pedido Recebido\"; total pago R$ 46,43 igual ao do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 10,
+    "tarefa": "Ver o histórico e usar \"Repetir pedido\"",
+    "detalhe": "O pedido apareceu no histórico como \"Recebido\"; \"Repetir pedido\" devolveu os 2 itens ao carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 11,
+    "tarefa": "Errar a senha várias vezes e usar \"Esqueci minha senha\"",
+    "detalhe": "Após 5 senhas erradas a conta foi bloqueada; \"Recuperar senha\" gerou o link, a nova senha foi salva e o login com ela funcionou.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 12,
+    "tarefa": "(Administrador) cadastrar produto, alterar estoque e avançar o status de um pedido",
+    "detalhe": "Produto \"Cupcake de Testador 1\" (R$ 17,50) cadastrado; estoque alterado de 5 para 9; pedido do testador avançado por Em produção → Saiu para entrega → Entregue.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 13,
+    "tarefa": "Avaliar um produto depois que o pedido estiver \"Entregue\"",
+    "detalhe": "Formulário liberado após \"Entregue\"; avaliação (nota 5 de teste) enviada e confirmada na tela.",
+    "resultado": "FUNCIONOU"
+   }
+  ],
+  "errosTecnicos": [],
+  "fim": "2026-11-15T21:21:36.260Z"
+ },
+ {
+  "testador": "Testador 2",
+  "dispositivo": "Android grande (emulado) 412×915, toque",
+  "navegador": "Chromium 153.0.8010.12",
+  "url": "http://localhost:3000",
+  "inicio": "2026-11-15T21:21:36.278Z",
+  "tarefas": [
+   {
+    "n": 1,
+    "tarefa": "Criar uma conta e entrar no sistema",
+    "detalhe": "Conta criada, sessão encerrada (\"Sair da conta\") e novo login com as mesmas credenciais funcionaram.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 2,
+    "tarefa": "Buscar um cupcake pelo nome e filtrar por categoria",
+    "detalhe": "Busca \"choc\" → 1 resultado (Chocolate Belga 70%); filtro \"Veganos\" → 1 resultado (Vegano de Cenoura); \"Todos\" voltou à lista completa.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 3,
+    "tarefa": "Abrir os detalhes de um produto (ingredientes e alérgenos aparecem?)",
+    "detalhe": "A tela de detalhes mostrou nome, preço, descrição, ingredientes e a linha de alérgenos.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 4,
+    "tarefa": "Adicionar produtos ao carrinho e alterar quantidades",
+    "detalhe": "2 itens no carrinho; ao tocar em \"+\" o subtotal passou de R$ 27.80 para R$ 42.70.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 5,
+    "tarefa": "Tentar colocar mais unidades do que o estoque (mensagem clara?)",
+    "detalhe": "Na tela de detalhes a quantidade parou em 18 (o estoque). Ao tentar somar mais uma unidade no carrinho apareceu: \"Ops! Restam apenas 18 unidades deste cupcake no estoque. Ajustamos para o máximo disponível.\". Depois o item foi removido do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 6,
+    "tarefa": "Cadastrar um endereço de entrega",
+    "detalhe": "Endereço (Av. Paulista, 1578 — CEP 01310-100) salvo e exibido como endereço de entrega.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 7,
+    "tarefa": "Usar um CEP fora da área (CEP 20000-009) — o sistema avisa?",
+    "detalhe": "Aviso exibido: \"Infelizmente não entregamos no CEP informado. Nosso raio máximo é de 30 km.\"; botão \"Finalizar\" ficou desabilitado e voltou a funcionar ao trocar para o endereço válido.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 8,
+    "tarefa": "Aplicar o cupom CUPCAKE10 e conferir o desconto e o total",
+    "detalhe": "Subtotal R$ 42,70, desconto −R$ 4,27 (10%), frete R$ 8,00, total R$ 46,43 — a conta confere.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 9,
+    "tarefa": "Finalizar o pedido e acompanhar o status",
+    "detalhe": "Pedido PED-2026-002 criado; linha do tempo na etapa \"Pedido Recebido\"; total pago R$ 46,43 igual ao do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 10,
+    "tarefa": "Ver o histórico e usar \"Repetir pedido\"",
+    "detalhe": "O pedido apareceu no histórico como \"Recebido\"; \"Repetir pedido\" devolveu os 2 itens ao carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 11,
+    "tarefa": "Errar a senha várias vezes e usar \"Esqueci minha senha\"",
+    "detalhe": "Após 5 senhas erradas a conta foi bloqueada; \"Recuperar senha\" gerou o link, a nova senha foi salva e o login com ela funcionou.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 12,
+    "tarefa": "(Administrador) cadastrar produto, alterar estoque e avançar o status de um pedido",
+    "detalhe": "Produto \"Cupcake de Testador 2\" (R$ 17,50) cadastrado; estoque alterado de 5 para 9; pedido do testador avançado por Em produção → Saiu para entrega → Entregue.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 13,
+    "tarefa": "Avaliar um produto depois que o pedido estiver \"Entregue\"",
+    "detalhe": "Formulário liberado após \"Entregue\"; avaliação (nota 5 de teste) enviada e confirmada na tela.",
+    "resultado": "FUNCIONOU"
+   }
+  ],
+  "errosTecnicos": [],
+  "fim": "2026-11-15T21:22:17.278Z"
+ },
+ {
+  "testador": "Testador 3",
+  "dispositivo": "Computador 1366×768, mouse e teclado",
+  "navegador": "Chromium 153.0.8010.12",
+  "url": "http://localhost:3000",
+  "inicio": "2026-11-15T21:22:17.294Z",
+  "tarefas": [
+   {
+    "n": 1,
+    "tarefa": "Criar uma conta e entrar no sistema",
+    "detalhe": "Conta criada, sessão encerrada (\"Sair da conta\") e novo login com as mesmas credenciais funcionaram.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 2,
+    "tarefa": "Buscar um cupcake pelo nome e filtrar por categoria",
+    "detalhe": "Busca \"choc\" → 1 resultado (Chocolate Belga 70%); filtro \"Veganos\" → 1 resultado (Vegano de Cenoura); \"Todos\" voltou à lista completa.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 3,
+    "tarefa": "Abrir os detalhes de um produto (ingredientes e alérgenos aparecem?)",
+    "detalhe": "A tela de detalhes mostrou nome, preço, descrição, ingredientes e a linha de alérgenos.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 4,
+    "tarefa": "Adicionar produtos ao carrinho e alterar quantidades",
+    "detalhe": "2 itens no carrinho; ao tocar em \"+\" o subtotal passou de R$ 27.80 para R$ 42.70.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 5,
+    "tarefa": "Tentar colocar mais unidades do que o estoque (mensagem clara?)",
+    "detalhe": "Na tela de detalhes a quantidade parou em 18 (o estoque). Ao tentar somar mais uma unidade no carrinho apareceu: \"Ops! Restam apenas 18 unidades deste cupcake no estoque. Ajustamos para o máximo disponível.\". Depois o item foi removido do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 6,
+    "tarefa": "Cadastrar um endereço de entrega",
+    "detalhe": "Endereço (Av. Paulista, 1578 — CEP 01310-100) salvo e exibido como endereço de entrega.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 7,
+    "tarefa": "Usar um CEP fora da área (CEP 20000-009) — o sistema avisa?",
+    "detalhe": "Aviso exibido: \"Infelizmente não entregamos no CEP informado. Nosso raio máximo é de 30 km.\"; botão \"Finalizar\" ficou desabilitado e voltou a funcionar ao trocar para o endereço válido.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 8,
+    "tarefa": "Aplicar o cupom CUPCAKE10 e conferir o desconto e o total",
+    "detalhe": "Subtotal R$ 42,70, desconto −R$ 4,27 (10%), frete R$ 8,00, total R$ 46,43 — a conta confere.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 9,
+    "tarefa": "Finalizar o pedido e acompanhar o status",
+    "detalhe": "Pedido PED-2026-003 criado; linha do tempo na etapa \"Pedido Recebido\"; total pago R$ 46,43 igual ao do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 10,
+    "tarefa": "Ver o histórico e usar \"Repetir pedido\"",
+    "detalhe": "O pedido apareceu no histórico como \"Recebido\"; \"Repetir pedido\" devolveu os 2 itens ao carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 11,
+    "tarefa": "Errar a senha várias vezes e usar \"Esqueci minha senha\"",
+    "detalhe": "Após 5 senhas erradas a conta foi bloqueada; \"Recuperar senha\" gerou o link, a nova senha foi salva e o login com ela funcionou.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 12,
+    "tarefa": "(Administrador) cadastrar produto, alterar estoque e avançar o status de um pedido",
+    "detalhe": "Produto \"Cupcake de Testador 3\" (R$ 17,50) cadastrado; estoque alterado de 5 para 9; pedido do testador avançado por Em produção → Saiu para entrega → Entregue.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 13,
+    "tarefa": "Avaliar um produto depois que o pedido estiver \"Entregue\"",
+    "detalhe": "Formulário liberado após \"Entregue\"; avaliação (nota 5 de teste) enviada e confirmada na tela.",
+    "resultado": "FUNCIONOU"
+   }
+  ],
+  "errosTecnicos": [],
+  "fim": "2026-11-15T21:22:58.106Z"
+ },
+ {
+  "testador": "Testador 4",
+  "dispositivo": "Tablet (emulado) 768×1024, toque",
+  "navegador": "Chromium 153.0.8010.12",
+  "url": "http://localhost:3000",
+  "inicio": "2026-11-15T21:22:58.130Z",
+  "tarefas": [
+   {
+    "n": 1,
+    "tarefa": "Criar uma conta e entrar no sistema",
+    "detalhe": "Conta criada, sessão encerrada (\"Sair da conta\") e novo login com as mesmas credenciais funcionaram.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 2,
+    "tarefa": "Buscar um cupcake pelo nome e filtrar por categoria",
+    "detalhe": "Busca \"choc\" → 1 resultado (Chocolate Belga 70%); filtro \"Veganos\" → 1 resultado (Vegano de Cenoura); \"Todos\" voltou à lista completa.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 3,
+    "tarefa": "Abrir os detalhes de um produto (ingredientes e alérgenos aparecem?)",
+    "detalhe": "A tela de detalhes mostrou nome, preço, descrição, ingredientes e a linha de alérgenos.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 4,
+    "tarefa": "Adicionar produtos ao carrinho e alterar quantidades",
+    "detalhe": "2 itens no carrinho; ao tocar em \"+\" o subtotal passou de R$ 27.80 para R$ 42.70.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 5,
+    "tarefa": "Tentar colocar mais unidades do que o estoque (mensagem clara?)",
+    "detalhe": "Na tela de detalhes a quantidade parou em 18 (o estoque). Ao tentar somar mais uma unidade no carrinho apareceu: \"Ops! Restam apenas 18 unidades deste cupcake no estoque. Ajustamos para o máximo disponível.\". Depois o item foi removido do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 6,
+    "tarefa": "Cadastrar um endereço de entrega",
+    "detalhe": "Endereço (Av. Paulista, 1578 — CEP 01310-100) salvo e exibido como endereço de entrega.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 7,
+    "tarefa": "Usar um CEP fora da área (CEP 20000-009) — o sistema avisa?",
+    "detalhe": "Aviso exibido: \"Infelizmente não entregamos no CEP informado. Nosso raio máximo é de 30 km.\"; botão \"Finalizar\" ficou desabilitado e voltou a funcionar ao trocar para o endereço válido.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 8,
+    "tarefa": "Aplicar o cupom CUPCAKE10 e conferir o desconto e o total",
+    "detalhe": "Subtotal R$ 42,70, desconto −R$ 4,27 (10%), frete R$ 8,00, total R$ 46,43 — a conta confere.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 9,
+    "tarefa": "Finalizar o pedido e acompanhar o status",
+    "detalhe": "Pedido PED-2026-004 criado; linha do tempo na etapa \"Pedido Recebido\"; total pago R$ 46,43 igual ao do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 10,
+    "tarefa": "Ver o histórico e usar \"Repetir pedido\"",
+    "detalhe": "O pedido apareceu no histórico como \"Recebido\"; \"Repetir pedido\" devolveu os 2 itens ao carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 11,
+    "tarefa": "Errar a senha várias vezes e usar \"Esqueci minha senha\"",
+    "detalhe": "Após 5 senhas erradas a conta foi bloqueada; \"Recuperar senha\" gerou o link, a nova senha foi salva e o login com ela funcionou.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 12,
+    "tarefa": "(Administrador) cadastrar produto, alterar estoque e avançar o status de um pedido",
+    "detalhe": "Produto \"Cupcake de Testador 4\" (R$ 17,50) cadastrado; estoque alterado de 5 para 9; pedido do testador avançado por Em produção → Saiu para entrega → Entregue.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 13,
+    "tarefa": "Avaliar um produto depois que o pedido estiver \"Entregue\"",
+    "detalhe": "Formulário liberado após \"Entregue\"; avaliação (nota 5 de teste) enviada e confirmada na tela.",
+    "resultado": "FUNCIONOU"
+   }
+  ],
+  "errosTecnicos": [],
+  "fim": "2026-11-15T21:23:38.639Z"
+ },
+ {
+  "testador": "Testador 5",
+  "dispositivo": "Android pequeno (emulado) 360×640, toque",
+  "navegador": "Chromium 153.0.8010.12",
+  "url": "http://localhost:3000",
+  "inicio": "2026-11-15T21:23:38.660Z",
+  "tarefas": [
+   {
+    "n": 1,
+    "tarefa": "Criar uma conta e entrar no sistema",
+    "detalhe": "Conta criada, sessão encerrada (\"Sair da conta\") e novo login com as mesmas credenciais funcionaram.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 2,
+    "tarefa": "Buscar um cupcake pelo nome e filtrar por categoria",
+    "detalhe": "Busca \"choc\" → 1 resultado (Chocolate Belga 70%); filtro \"Veganos\" → 1 resultado (Vegano de Cenoura); \"Todos\" voltou à lista completa.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 3,
+    "tarefa": "Abrir os detalhes de um produto (ingredientes e alérgenos aparecem?)",
+    "detalhe": "A tela de detalhes mostrou nome, preço, descrição, ingredientes e a linha de alérgenos.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 4,
+    "tarefa": "Adicionar produtos ao carrinho e alterar quantidades",
+    "detalhe": "2 itens no carrinho; ao tocar em \"+\" o subtotal passou de R$ 27.80 para R$ 42.70.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 5,
+    "tarefa": "Tentar colocar mais unidades do que o estoque (mensagem clara?)",
+    "detalhe": "Na tela de detalhes a quantidade parou em 18 (o estoque). Ao tentar somar mais uma unidade no carrinho apareceu: \"Ops! Restam apenas 18 unidades deste cupcake no estoque. Ajustamos para o máximo disponível.\". Depois o item foi removido do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 6,
+    "tarefa": "Cadastrar um endereço de entrega",
+    "detalhe": "Endereço (Av. Paulista, 1578 — CEP 01310-100) salvo e exibido como endereço de entrega.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 7,
+    "tarefa": "Usar um CEP fora da área (CEP 20000-009) — o sistema avisa?",
+    "detalhe": "Aviso exibido: \"Infelizmente não entregamos no CEP informado. Nosso raio máximo é de 30 km.\"; botão \"Finalizar\" ficou desabilitado e voltou a funcionar ao trocar para o endereço válido.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 8,
+    "tarefa": "Aplicar o cupom CUPCAKE10 e conferir o desconto e o total",
+    "detalhe": "Subtotal R$ 42,70, desconto −R$ 4,27 (10%), frete R$ 8,00, total R$ 46,43 — a conta confere.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 9,
+    "tarefa": "Finalizar o pedido e acompanhar o status",
+    "detalhe": "Pedido PED-2026-005 criado; linha do tempo na etapa \"Pedido Recebido\"; total pago R$ 46,43 igual ao do carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 10,
+    "tarefa": "Ver o histórico e usar \"Repetir pedido\"",
+    "detalhe": "O pedido apareceu no histórico como \"Recebido\"; \"Repetir pedido\" devolveu os 2 itens ao carrinho.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 11,
+    "tarefa": "Errar a senha várias vezes e usar \"Esqueci minha senha\"",
+    "detalhe": "Após 5 senhas erradas a conta foi bloqueada; \"Recuperar senha\" gerou o link, a nova senha foi salva e o login com ela funcionou.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 12,
+    "tarefa": "(Administrador) cadastrar produto, alterar estoque e avançar o status de um pedido",
+    "detalhe": "Produto \"Cupcake de Testador 5\" (R$ 17,50) cadastrado; estoque alterado de 5 para 9; pedido do testador avançado por Em produção → Saiu para entrega → Entregue.",
+    "resultado": "FUNCIONOU"
+   },
+   {
+    "n": 13,
+    "tarefa": "Avaliar um produto depois que o pedido estiver \"Entregue\"",
+    "detalhe": "Formulário liberado após \"Entregue\"; avaliação (nota 5 de teste) enviada e confirmada na tela.",
+    "resultado": "FUNCIONOU"
+   }
+  ],
+  "errosTecnicos": [],
+  "fim": "2026-11-15T21:24:19.305Z"
+ }
+]
